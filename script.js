@@ -1,4 +1,6 @@
-document.getElementById('contactForm').addEventListener('submit', function(event) {
+const fetch = require('node-fetch');
+
+document.getElementById('contactForm').addEventListener('submit', async function(event) {
   event.preventDefault();
   const email = document.getElementById('email').value;
   const message = document.getElementById('message').value;
@@ -8,8 +10,24 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     return;
   }
 
-  // Send email via SES (AWS SDK code to be added later)
-  alert('Form submitted successfully!');
+  try {
+    const response = await fetch('https://823oik3ymk.execute-api.eu-west-1.amazonaws.com/prod/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, message })
+    });
+
+    if (response.ok) {
+      alert('Form submitted successfully!');
+    } else {
+      alert('Failed to submit form.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+  }
 });
 
 function validateEmail(email) {
