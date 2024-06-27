@@ -1,5 +1,3 @@
-const fetch = require('node-fetch');
-
 document.getElementById('contactForm').addEventListener('submit', async function(event) {
   event.preventDefault();
   const email = document.getElementById('email').value;
@@ -14,7 +12,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     const response = await fetch('https://823oik3ymk.execute-api.eu-west-1.amazonaws.com/prod/contact', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email, message })
     });
@@ -26,7 +24,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
     }
   } catch (error) {
     console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
+    alert('An error occurred while submitting the form.');
   }
 });
 
