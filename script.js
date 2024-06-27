@@ -1,3 +1,4 @@
+/*global fetch*/
 document.getElementById('contactForm').addEventListener('submit', async function(event) {
   event.preventDefault();
   const email = document.getElementById('email').value;
